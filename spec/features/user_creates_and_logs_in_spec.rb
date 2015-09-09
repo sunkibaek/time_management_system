@@ -6,10 +6,10 @@ RSpec.feature "UserCreatesAndLogsIn", type: :feature do
 
     click_on 'Sign Up'
 
-    fill_in 'Name', 'Test User'
-    fill_in 'Email', 'test@example.com'
-    fill_in 'Password', 'TestPassword'
-    fill_in 'Password Confirm', 'TestPassword'
+    fill_in 'Name', with: 'Test User'
+    fill_in 'Email', with: 'test@example.com'
+    fill_in 'Password', with: 'TestPassword'
+    fill_in 'Password Confirm', with: 'TestPassword'
 
     click_on 'Save'
 
