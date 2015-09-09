@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="projectApp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,14 +17,28 @@
   </head>
 
   <body>
-    <a href="#">Sign Up</a>
-    <div class="">
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Brand</a>
+        </div>
+
+        <div>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Sign Up</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
       <h2>Sign Up</h2>
+
       <form class="" method="post">
         <label for="name">Name</label>
-        <input type="text" id="name" name="name" value="First Last">
+        <input type="text" id="name" name="name" placeholder="First Last">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" value="test@example.com">
+        <input type="email" id="email" name="email" placeholder="test@example.com">
         <label for="password">Password</label>
         <input type="password" id="password" name="password">
         <label for="password_confirm">Password Confirm</label>
@@ -32,6 +46,9 @@
         <input type="submit" value="Save">
       </form>
     </div>
-    <%= yield %>
+
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
