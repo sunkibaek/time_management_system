@@ -4,7 +4,11 @@ RSpec.feature "UserCreatesAndLogsIn", type: :feature do
   scenario 'creates an account' do
     visit '/'
 
+    expect(page).to have_no_css 'h2', text: 'Sign Up'
+
     click_on 'Sign Up'
+
+    expect(page).to have_css 'h2', text: 'Sign Up'
 
     fill_in 'Name', with: 'Test User'
     fill_in 'Email', with: 'test@example.com'
@@ -13,7 +17,7 @@ RSpec.feature "UserCreatesAndLogsIn", type: :feature do
 
     click_on 'Save'
 
-    page.should have_content('User account successfully created.')
-    page.should have_content('Test User')
+    expect(page).to have_text('User account successfully created.')
+    expect(page).to have_text('Test User')
   end
 end
