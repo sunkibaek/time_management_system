@@ -7,7 +7,7 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
-    <title>ProjectSunkiBaek</title>
+    <title>Project Sunki Baek</title>
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -17,6 +17,20 @@
 
   <body>
     <a href="#">Sign Up</a>
+    <div class="">
+      <h2>Sign Up</h2>
+      <form class="" method="post">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" value="First Last">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="test@example.com">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password">
+        <label for="password_confirm">Password Confirm</label>
+        <input type="password" id="password_confirm" name="password_confirm">
+        <input type="submit" value="Save">
+      </form>
+    </div>
     <%= yield %>
   </body>
 </html>
