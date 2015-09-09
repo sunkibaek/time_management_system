@@ -1,0 +1,5 @@
+.rspec
+/log
+/tmp
+/public/system
+/spec/tmp
