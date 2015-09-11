@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 ruby '2.2.3'
 
 gem 'angularjs-rails-cdn'
+gem 'angular_rails_csrf'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
 gem 'coffee-rails'
