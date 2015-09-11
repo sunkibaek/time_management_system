@@ -9,7 +9,7 @@
 
     $http.post '/api/v1/session', data
     .then (response) ->
-      user.update
+      user.update()
       notification.updateMessage response.data.notice
     , (response) ->
       notification.updateMessage response.data.notice
