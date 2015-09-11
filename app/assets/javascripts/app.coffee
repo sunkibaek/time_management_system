@@ -1,6 +1,3 @@
-app = angular.module 'projectApp', []
+'use strict'
 
-app.controller 'MainCtrl', ->
-  @showSignUpForm = false
-
-  return this
+@app = angular.module 'projectApp', []
