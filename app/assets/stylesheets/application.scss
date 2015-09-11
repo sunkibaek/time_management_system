@@ -1,2 +1,17 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.p-site-notification {
+  position: relative;
+
+  .alert {
+    @extend .text-center;
+    $width: 500px;
+    width: $width;
+    position: absolute;
+    z-index: 100;
+    top: 15px;
+    left: 50%;
+    margin-left: - ($width / 2);
+  }
+}
