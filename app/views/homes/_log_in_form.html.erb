@@ -1,0 +1,17 @@
+<%= form_for :session, url: api_v1_session_path, method: :post, html: { class: 'form-inline', 'ng-controller' => 'LogInFormCtrl as logInForm', 'ng-submit' => 'logInForm.submit($event)' } do |f| %>
+  <div class="form-group">
+    <%= f.label :email %>
+
+    <%= f.email_field :email, placeholder: 'test@example.com', class: 'form-control', 'ng-model' => 'logInForm.input.email' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password %>
+
+    <%= f.password_field :password, placeholder: '8 or more characters', class: 'form-control', 'ng-model' => 'logInForm.input.password' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  </div>
+<% end %>
