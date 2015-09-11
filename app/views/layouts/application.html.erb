@@ -17,6 +17,12 @@
   </head>
 
   <body ng-controller="MainCtrl as main">
+    <div class="p-site-notification" ng-show="main.notification.message">
+      <div class="alert alert-info" role="alert">
+        {{ main.notification.message }}
+      </div>
+    </div>
+
     <nav class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">
@@ -25,7 +31,21 @@
 
         <div>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" ng-click="main.showSignUpForm = !main.showSignUpForm">Sign Up</a></li>
+            <li ng-show="!main.user.isLoggedIn">
+              <a href="#" ng-click="main.showSignUpForm = !main.showSignUpForm">Sign Up</a>
+            </li>
+
+            <li ng-show="!main.user.isLoggedIn">
+              <a href="#" ng-click="main.showLogInForm = !main.showLogInForm">Log In</a>
+            </li>
+
+            <li ng-show="main.user.isLoggedIn">
+              <a href="#" disabled>{{ main.user.username }}</a>
+            </li>
+
+            <li ng-show="main.user.isLoggedIn">
+              <a href="#">Log Out</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -35,6 +55,12 @@
       <h2>Sign Up</h2>
 
       <%= render partial: 'sign_up_form' %>
+    </div>
+
+    <div class="container" ng-show="main.showLogInForm">
+      <h2>Log In</h2>
+
+      <%= render partial: 'log_in_form' %>
     </div>
 
     <div class="container">
