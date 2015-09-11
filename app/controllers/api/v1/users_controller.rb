@@ -11,7 +11,15 @@ module Api
           sign_in(@user)
           flash[:notice] = MSG[:success]
         else
-          render json: { notice: MSG[:error] }
+          render json: { notice: MSG[:error] }, status: 400
+        end
+      end
+
+      def me
+        if signed_in?
+          render json: { name: current_user.name }, status: 200
+        else
+          render json: {}, status: 200
         end
       end
 
