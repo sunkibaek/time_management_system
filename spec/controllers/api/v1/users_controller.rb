@@ -11,7 +11,7 @@ describe Api::V1::UsersController do
       end
 
       it 'creates an user account' do
-        expect{ subject }.to change(User, :count).by 1
+        expect{ subject }.to change{ User.count }.by 1
         expect(flash[:notice]).to eq Api::V1::UsersController::MSG[:success]
         expect(response).to render_template('api/v1/users/create')
         expect(response.status).to eq 200
