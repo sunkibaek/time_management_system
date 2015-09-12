@@ -28,4 +28,15 @@ describe Api::V1::SessionsController do
       end
     end
   end
+
+  describe '#destroy' do
+    it 'logs out the user' do
+      user = create :user
+      delete :destroy
+
+      expect(response.status).to eq 200
+      expect(response.body).to eq(
+        { notice: Api::V1::SessionsController::MSG[:destroy] }.to_json)
+    end
+  end
 end
