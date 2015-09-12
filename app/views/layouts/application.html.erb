@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= angularjs_include_tag :google %>
+    <%= angularjs_include_tag :google, modules: [:sanitize] %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
     <title>Project Sunki Baek</title>
@@ -26,7 +26,7 @@
     <nav class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Brand</a>
+          <a class="navbar-brand" href="#">Time Management System</a>
         </div>
 
         <div>
@@ -51,17 +51,25 @@
       </div>
     </nav>
 
-    <div class="container" ng-show="!main.user.isLoggedIn">
-      <div ng-show="main.showSignUpForm">
-        <h2>Sign Up</h2>
+    <div class="container">
+      <div ng-show="!main.user.isLoggedIn">
+        <div ng-show="main.showSignUpForm">
+          <h2>Sign Up</h2>
 
-        <%= render partial: 'sign_up_form' %>
+          <%= render partial: 'sign_up_form' %>
+        </div>
+
+        <div ng-show="main.showLogInForm">
+          <h2>Log In</h2>
+
+          <%= render partial: 'log_in_form' %>
+        </div>
       </div>
 
-      <div ng-show="main.showLogInForm">
-        <h2>Log In</h2>
-
-        <%= render partial: 'log_in_form' %>
+      <div ng-show="!main.user.isLoggedIn">
+        <div class="well text-center">
+          Hi! Sign Up or Log In to add your tasks.
+        </div>
       </div>
     </div>
 
