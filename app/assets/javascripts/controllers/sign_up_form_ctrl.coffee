@@ -1,6 +1,6 @@
 'use strict'
 
-@app.controller 'SignUpFormCtrl', ($http, notification) ->
+@app.controller 'SignUpFormCtrl', ($http, notification, user) ->
   @input = {}
 
   @submit = ($event) ->
@@ -9,7 +9,7 @@
 
     $http.post '/api/v1/users', data
     .then (response) ->
-      console.log response
+      user.update()
       notification.updateMessage response.data.notice
     , (response) ->
       notification.updateMessage response.data.notice
