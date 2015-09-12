@@ -39,4 +39,18 @@ RSpec.feature "UserCreatesAndLogsIn", type: :feature do
     expect(page).to have_text('Successfully logged in.')
     expect(page).to have_text(user.name)
   end
+
+  scenario 'logs out', js: true do
+    user = create :user
+    sign_in user
+
+    visit '/'
+
+    expect(page).to have_css 'li a', text: user.name
+
+    click_on 'Log Out'
+
+    expect(page).to have_no_css 'li a', text: user.name
+    expect(page).to have_text('Successfully logged out.')
+  end
 end
