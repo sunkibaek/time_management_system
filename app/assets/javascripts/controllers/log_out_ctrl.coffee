@@ -7,6 +7,7 @@
       user.update()
       notification.updateMessage response.data.notice
     , (response) ->
+      user.update()
       notification.updateMessage response.data.notice
 
   return this

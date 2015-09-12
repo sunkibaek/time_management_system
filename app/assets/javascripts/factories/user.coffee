@@ -8,7 +8,7 @@
     $http.get '/api/v1/users/me'
     .then (response) =>
       @name = response.data.name
-      @isLoggedIn = true if @name
+      @isLoggedIn = @name? ? true : false
 
   @update()
 

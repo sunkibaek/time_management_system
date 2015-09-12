@@ -51,6 +51,7 @@ RSpec.feature "UserCreatesAndLogsIn", type: :feature do
     click_on 'Log Out'
 
     expect(page).to have_no_css 'li a', text: user.name
+    expect(page).to have_no_css 'li a', text: 'Log Out'
     expect(page).to have_text('Successfully logged out.')
   end
 end
