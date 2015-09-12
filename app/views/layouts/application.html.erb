@@ -39,28 +39,30 @@
               <a href="#" ng-click="main.showLogInForm = !main.showLogInForm">Log In</a>
             </li>
 
-            <li ng-show="main.user.isLoggedIn">
-              <a href="#" disabled>{{ main.user.username }}</a>
+            <li ng-show="main.user.isLoggedIn" class="disabled">
+              <a href="#"><i>Logged in as <b>{{ main.user.name }}</b></i></a>
             </li>
 
             <li ng-show="main.user.isLoggedIn">
-              <a href="#">Log Out</a>
+              <a href="#" ng-controller="LogOutCtrl as logOut" ng-click="logOut.logOut()">Log Out</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <div class="container" ng-show="main.showSignUpForm">
-      <h2>Sign Up</h2>
+    <div class="container" ng-show="!main.user.isLoggedIn">
+      <div ng-show="main.showSignUpForm">
+        <h2>Sign Up</h2>
 
-      <%= render partial: 'sign_up_form' %>
-    </div>
+        <%= render partial: 'sign_up_form' %>
+      </div>
 
-    <div class="container" ng-show="main.showLogInForm">
-      <h2>Log In</h2>
+      <div ng-show="main.showLogInForm">
+        <h2>Log In</h2>
 
-      <%= render partial: 'log_in_form' %>
+        <%= render partial: 'log_in_form' %>
+      </div>
     </div>
 
     <div class="container">
