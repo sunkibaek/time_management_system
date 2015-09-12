@@ -1,3 +1,3 @@
 'use strict'
 
-@app = angular.module 'projectApp', []
+@app = angular.module 'projectApp', ['ngSanitize']
