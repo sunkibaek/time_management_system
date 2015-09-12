@@ -2,7 +2,8 @@ module Api
   module V1
     class SessionsController < ApplicationController
       MSG = { success: 'Successfully logged in.',
-        error: 'There was an error loggin in.' }
+        error: 'There was an error loggin in.',
+        destroy: 'Successfully logged out.' }
 
       def create
         user = authenticate_session(session_params)
@@ -12,6 +13,11 @@ module Api
         else
           render json: { notice: MSG[:error] }, status: 400
         end
+      end
+
+      def destroy
+        sign_out
+        render json: { notice: MSG[:destroy] }, status: 200
       end
 
       private
