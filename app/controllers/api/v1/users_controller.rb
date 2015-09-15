@@ -17,7 +17,10 @@ module Api
 
       def me
         if signed_in?
-          render json: { name: current_user.name }, status: 200
+          render json:
+            { name: current_user.name,
+              preferred_working_hour: current_user.preferred_working_hour
+            }, status: 200
         else
           render json: {}, status: 200
         end
