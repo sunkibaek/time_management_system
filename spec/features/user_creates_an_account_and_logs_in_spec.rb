@@ -4,9 +4,9 @@ feature "User creates an account and logs in" do
   scenario 'creates an account', js: true do
     visit '/'
 
-    expect(page).to have_css 'h2', text: 'Sign Up', visible: false
-
-    click_on 'Sign Up'
+    within 'nav' do
+      click_on 'Sign Up'
+    end
 
     expect(page).to have_css 'h2', text: 'Sign Up', visible: true
 
@@ -25,9 +25,9 @@ feature "User creates an account and logs in" do
 
     visit '/'
 
-    expect(page).to have_css 'h2', text: 'Log In', visible: false
-
-    click_on 'Log In'
+    within 'nav' do
+      click_on 'Log In'
+    end
 
     expect(page).to have_css 'h2', text: 'Log In', visible: true
 
@@ -44,7 +44,7 @@ feature "User creates an account and logs in" do
     user = create :user
     sign_in user
 
-    visit '/'
+    visit '/tasks'
 
     expect(page).to have_css 'li a', text: user.name
 
