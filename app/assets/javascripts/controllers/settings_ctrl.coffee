@@ -1,6 +1,6 @@
 'use strict'
 
-@app.controller 'SettingsCtrl', ($http, user) ->
+@app.controller 'SettingsCtrl', ($http, $location, user, notification) ->
   @input = {}
 
   @submit = ($event) ->
