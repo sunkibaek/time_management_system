@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resource :session, only: [:create, :destroy]
       resources :tasks, only: [:index, :create, :update, :show, :destroy]
-      resources :users, only: [:create] do
+      resources :users, only: [:create, :update] do
         collection do
           get 'me'
         end
