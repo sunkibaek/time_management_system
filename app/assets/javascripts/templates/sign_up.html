@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-lg-offset-2 col-lg-8">
+    <h2>Sign Up</h2>
+
+    <form
+      class="form-horizontal margin-above"
+      ng-controller="SignUpFormCtrl as signUpForm"
+      ng-submit="signUpForm.submit($event)">
+      <div class="form-group">
+        <label for="name" class="control-label col-sm-2">Name</label>
+
+        <div class="col-sm-10">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-control"
+            placeholder="First name Last name"
+            ng-model="signUpForm.input.name">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="control-label col-sm-2">Email</label>
+
+        <div class="col-sm-10">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            placeholder="test@example.com"
+            ng-model="signUpForm.input.email">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="control-label col-sm-2">Password</label>
+
+        <div class="col-sm-10">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="8 or more characters"
+            ng-model="signUpForm.input.password">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <input
+            type="submit"
+            name="Submit"
+            value="Submit"
+            class="btn btn-primary">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

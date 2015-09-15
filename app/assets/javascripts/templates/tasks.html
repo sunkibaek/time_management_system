@@ -1,0 +1,31 @@
+<a href="/tasks/new" class="pull-right btn btn-primary">Add a Task</a>
+
+<h1>Tasks</h1>
+
+<div ng-show="main.user.isLoggedIn">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>
+          <a
+            href="#"
+            ng-click="tasks.orderToggle()"
+            ng-bind-html="tasks.dateText"
+            id="date-toggle"></a>
+        </th>
+        <th>Hours</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        class="{{ task.css_class }}"
+        ng-repeat="task in tasks.collection.all | orderBy: tasks.dateOrder">
+        <td><a href="/tasks/edit/{{ task.id }}">{{ task.description }}</a></td>
+        <td>{{ task.date | date : 'MM-dd-yyyy' }}</td>
+        <td>{{ task.hour }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
