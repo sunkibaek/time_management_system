@@ -12,7 +12,7 @@
     .then (response) =>
       @all = response.data.tasks
       @all.map (task) ->
-        if task.total_hour > user.preferred_working_hour
+        if task.total_hour > user.preferredWorkingHour
           task.css_class = 'danger'
         else
           task.css_class = 'success'
