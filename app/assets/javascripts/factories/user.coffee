@@ -8,6 +8,7 @@
     $http.get '/api/v1/users/me'
     .then (response) =>
       @name = response.data.name
+      @preferredWorkingHour = response.data.preferred_working_hour
       @isLoggedIn = @name? ? true : false
 
   @update()
