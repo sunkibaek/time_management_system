@@ -1,0 +1,31 @@
+'use strict'
+
+@app = angular.module 'projectApp', ['ngSanitize', 'ngRoute']
+  .config ($routeProvider, $locationProvider) ->
+    $routeProvider
+      .when '/', {
+        templateUrl: "<%= asset_path('templates/home.html') %>" }
+      .when '/log_in', {
+        templateUrl: "<%= asset_path('templates/log_in.html') %>" }
+      .when '/sign_up', {
+        templateUrl: "<%= asset_path('templates/sign_up.html') %>" }
+      .when '/tasks', {
+        templateUrl: "<%= asset_path('templates/tasks.html') %>"
+        controller: 'TasksCtrl'
+        controllerAs: 'tasks' }
+      .when '/tasks/new', {
+        templateUrl: "<%= asset_path('templates/tasks_form.html') %>"
+        controller: 'TasksNewCtrl'
+        controllerAs: 'task' }
+      .when '/tasks/edit/:taskId', {
+        templateUrl: "<%= asset_path('templates/tasks_form.html') %>"
+        controller: 'TasksEditCtrl'
+        controllerAs: 'task' }
+      .when '/settings', {
+        templateUrl: "<%= asset_path('templates/settings.html') %>"
+        controller: 'SettingsCtrl'
+        controllersAs: 'settings' }
+      .otherwise {
+        redirectTo: '/' }
+
+    $locationProvider.html5Mode(true)
