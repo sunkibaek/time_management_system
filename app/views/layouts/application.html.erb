@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= angularjs_include_tag :google, modules: [:sanitize] %>
+    <%= angularjs_include_tag :google, modules: [:sanitize, :route] %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
-    <title>Project Sunki Baek</title>
+    <title>Time Management System</title>
+    <base href="/">
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -26,55 +27,53 @@
     <nav class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Time Management System</a>
+          <a class="navbar-brand" href="/">Time Management System</a>
         </div>
 
-        <div>
-          <ul class="nav navbar-nav navbar-right">
-            <li ng-show="!main.user.isLoggedIn">
-              <a href="#" ng-click="main.showSignUpForm = !main.showSignUpForm">Sign Up</a>
-            </li>
+        <ul class="nav navbar-nav">
+          <li
+            ng-class="{ active: '/tasks' == main.currentPath }"
+            ng-show="main.user.isLoggedIn">
+            <a href="/tasks">Tasks</a>
+          </li>
+        </ul>
 
-            <li ng-show="!main.user.isLoggedIn">
-              <a href="#" ng-click="main.showLogInForm = !main.showLogInForm">Log In</a>
-            </li>
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-show="!main.user.isLoggedIn">
+            <a href="/sign_up">Sign Up</a>
+          </li>
 
-            <li ng-show="main.user.isLoggedIn" class="disabled">
-              <a href="#"><i>Logged in as <b>{{ main.user.name }}</b></i></a>
-            </li>
+          <li ng-show="!main.user.isLoggedIn">
+            <a href="/log_in">Log In</a>
+          </li>
 
-            <li ng-show="main.user.isLoggedIn">
-              <a href="#" ng-controller="LogOutCtrl as logOut" ng-click="logOut.logOut()">Log Out</a>
-            </li>
-          </ul>
-        </div>
+          <li ng-show="main.user.isLoggedIn" class="disabled">
+            <a href="#"><i>Logged in as <b>{{ main.user.name }}</b></i></a>
+          </li>
+
+          <li
+            ng-class="{ active: '/settings' == main.currentPath }"
+            ng-show="main.user.isLoggedIn">
+            <a href="/settings">
+              Preferred working hour:
+              <b>{{ main.user.preferred_working_hour }}</b>
+            </a>
+          </li>
+
+          <li ng-show="main.user.isLoggedIn">
+            <a
+              href="#"
+              ng-controller="LogOutCtrl as logOut"
+              ng-click="logOut.logOut()">
+              Log Out
+            </a>
+          </li>
+        </ul>
       </div>
     </nav>
 
     <div class="container">
-      <div ng-show="!main.user.isLoggedIn">
-        <div ng-show="main.showSignUpForm">
-          <h2>Sign Up</h2>
-
-          <%= render partial: 'sign_up_form' %>
-        </div>
-
-        <div ng-show="main.showLogInForm">
-          <h2>Log In</h2>
-
-          <%= render partial: 'log_in_form' %>
-        </div>
-      </div>
-
-      <div ng-show="!main.user.isLoggedIn">
-        <div class="well text-center">
-          Hi! Sign Up or Log In to add your tasks.
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <%= yield %>
+      <div ng-view></div>
     </div>
   </body>
 </html>
