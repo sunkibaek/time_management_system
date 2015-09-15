@@ -1,8 +1,15 @@
 'use strict'
 
-@app.controller 'MainCtrl', (notification, user) ->
+@app.controller 'MainCtrl', ($location, $rootScope, notification, user) ->
   @showSignUpForm = false
   @notification = notification
   @user = user
+  @currentPath = ''
+
+  updateCurrentPath = =>
+    $rootScope.$on '$routeChangeSuccess', =>
+      @currentPath = $location.path()
+
+  updateCurrentPath()
 
   return this
