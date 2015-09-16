@@ -73,20 +73,21 @@ feature 'User manages tasks' do
   scenario 'see the list with overworking days highlighted', js: true do
     user.preferred_working_hour = 8
 
-    task_of_regular_day = create :task, hour: 3, date: '09/10/2015', user: user
-    task_1_of_over_working_day = create(:task,
+    task_of_less_working_day = create(
+      :task, hour: 3, date: '09/10/2015', user: user)
+    task_1_of_regular_day = create(:task,
       hour: 5, date: '09/11/2015', user: user)
-    task_2_of_over_working_day = create(:task,
+    task_2_of_regular_day = create(:task,
       hour: 5, date: '09/11/2015', user: user)
 
     visit '/tasks'
 
+    expect(page).to have_css('table tbody tr.danger',
+      text: task_text(task_of_less_working_day))
     expect(page).to have_css('table tbody tr.success',
-      text: task_text(task_of_regular_day))
-    expect(page).to have_css('table tbody tr.danger',
-      text: task_text(task_1_of_over_working_day))
-    expect(page).to have_css('table tbody tr.danger',
-      text: task_text(task_2_of_over_working_day))
+      text: task_text(task_1_of_regular_day))
+    expect(page).to have_css('table tbody tr.success',
+      text: task_text(task_2_of_regular_day))
   end
 
   scenario 'filters the list with from and to date', js: true do
@@ -98,6 +99,24 @@ feature 'User manages tasks' do
     fill_in 'From', with: '01/01/2015'
     fill_in 'To', with: '12/31/2015'
 
+    expect(page).to have_css('table tbody tr',
+      text: task_text(task_in_range))
+    expect(page).not_to have_css('table tbody tr',
+      text: task_text(task_out_of_range))
+  end
+
+  scenario 'exports the filtered list', js: true do
+    task_out_of_range = create :task, date: '09/01/2014', user: user
+    task_in_range = create :task, date: '09/01/2015', user: user
+
+    visit '/tasks'
+
+    fill_in 'From', with: '01/01/2015'
+    fill_in 'To', with: '12/31/2015'
+
+    click_on 'Export'
+
+    expect(page).not_to have_css('a', text: 'Time Management System')
     expect(page).to have_css('table tbody tr',
       text: task_text(task_in_range))
     expect(page).not_to have_css('table tbody tr',
