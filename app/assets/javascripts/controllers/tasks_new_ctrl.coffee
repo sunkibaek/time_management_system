@@ -14,7 +14,7 @@
 
     $http.post '/api/v1/tasks', data
     .then (response) =>
-      tasks.add @input
+      tasks.update()
       @input = {}
       notification.updateMessage response.data.notice
       $location.path('/tasks').replace()
