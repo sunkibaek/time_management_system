@@ -34,6 +34,22 @@ describe Api::V1::UsersController do
     end
   end
 
+  describe '#update' do
+    context 'with valid input' do
+      it 'updates preferred working hour with success notice' do
+        user = create :user
+        sign_in user
+
+        patch :update,
+          { id: 0, user: { preferred_working_hour: 4 }, format: :json }
+
+        expect(response.status).to eq 200
+        expect(response.body).to eq(
+          { notice: Api::V1::UsersController::MSG[:update] }.to_json)
+      end
+    end
+  end
+
   describe '#me' do
     context 'when logged in' do
       it 'returns currently logged in user' do
