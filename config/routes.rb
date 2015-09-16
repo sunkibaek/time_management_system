@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'homes#show'
 
   %w(/log_in /sign_up /tasks /tasks/new /tasks/edit/:id \
-       /tasks/export/:from/:to /settings).each do |path|
+       /tasks/export/:from/:to /settings /admin/users).each do |path|
     get path, to: 'homes#show'
   end
 
@@ -14,6 +14,10 @@ Rails.application.routes.draw do
         collection do
           get 'me'
         end
+      end
+
+      namespace :admin do
+        resources :users, only: [:index]
       end
     end
   end

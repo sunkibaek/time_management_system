@@ -1,0 +1,25 @@
+<h1>User management</h1>
+
+<table class="table">
+  <thead>
+    <td>
+      Name
+    </td>
+
+    <td>
+      Preferred Working Hour
+    </td>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat="user in adminUsers.all ">
+      <td>
+        {{ user.name }}
+      </td>
+
+      <td>
+        {{ user.preferred_working_hour }}
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -36,6 +36,12 @@
             ng-show="main.user.isLoggedIn">
             <a href="/tasks">Tasks</a>
           </li>
+
+          <li
+            ng-class="{ active: '/admin/users' == main.currentPath }"
+            ng-if="main.user.isUserManager">
+            <a href="/admin/users">Users</a>
+          </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
