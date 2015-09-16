@@ -4,9 +4,12 @@
 
     <form
       class="form-horizontal margin-above"
-      ng-controller="SignUpFormCtrl as signUpForm"
-      ng-submit="signUpForm.submit($event)">
-      <div class="form-group">
+      name="signUpForm"
+      ng-submit="signUp.submit($event)"
+      novalidate>
+      <div
+        class="form-group"
+        ng-class="{ 'has-error' : signUpForm.name.$invalid && !signUpForm.name.$pristine }">
         <label for="name" class="control-label col-sm-2">Name</label>
 
         <div class="col-sm-10">
@@ -16,11 +19,14 @@
             name="name"
             class="form-control"
             placeholder="First name Last name"
-            ng-model="signUpForm.input.name">
+            ng-model="signUp.input.name"
+            required>
         </div>
       </div>
 
-      <div class="form-group">
+      <div
+        class="form-group"
+        ng-class="{ 'has-error' : signUpForm.email.$invalid && !signUpForm.email.$pristine }">
         <label for="email" class="control-label col-sm-2">Email</label>
 
         <div class="col-sm-10">
@@ -30,11 +36,14 @@
             name="email"
             class="form-control"
             placeholder="test@example.com"
-            ng-model="signUpForm.input.email">
+            ng-model="signUp.input.email"
+            required>
         </div>
       </div>
 
-      <div class="form-group">
+      <div
+        class="form-group"
+        ng-class="{ 'has-error' : signUpForm.password.$invalid && !signUpForm.password.$pristine }">
         <label for="password" class="control-label col-sm-2">Password</label>
 
         <div class="col-sm-10">
@@ -44,7 +53,9 @@
             name="password"
             class="form-control"
             placeholder="8 or more characters"
-            ng-model="signUpForm.input.password">
+            ng-model="signUp.input.password"
+            ng-minlength="8"
+            required>
         </div>
       </div>
 
@@ -54,6 +65,7 @@
             type="submit"
             name="Submit"
             value="Submit"
+            ng-disabled="signUpForm.$invalid"
             class="btn btn-primary">
         </div>
       </div>

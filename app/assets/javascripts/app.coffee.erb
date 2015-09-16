@@ -10,7 +10,9 @@
         controller: 'LogInCtrl'
         controllerAs: 'logIn' }
       .when '/sign_up', {
-        templateUrl: "<%= asset_path('templates/sign_up.html') %>" }
+        templateUrl: "<%= asset_path('templates/sign_up.html') %>"
+        controller: 'SignUpCtrl'
+        controllerAs: 'signUp' }
       .when '/tasks', {
         templateUrl: "<%= asset_path('templates/tasks.html') %>"
         controller: 'TasksCtrl'

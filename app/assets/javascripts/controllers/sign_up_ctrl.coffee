@@ -1,6 +1,6 @@
 'use strict'
 
-@app.controller 'SignUpFormCtrl', ($http, $location, notification, user) ->
+@app.controller 'SignUpCtrl', ($http, $location, notification, user) ->
   @input = {}
 
   @submit = ($event) ->
@@ -14,5 +14,6 @@
       notification.updateMessage response.data.notice
     , (response) ->
       notification.updateMessage response.data.notice
+      console.log response
 
   return this
