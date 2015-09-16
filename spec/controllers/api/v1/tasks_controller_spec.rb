@@ -40,7 +40,7 @@ describe Api::V1::TasksController do
       post :create,
         { task:
           { description: 'Test task description',
-            date: '31/12/2014',
+            date: '12/31/2014',
             hour: 4 },
           format: :json }
     end

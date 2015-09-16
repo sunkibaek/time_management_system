@@ -1,7 +1,7 @@
 'use strict'
 
 @app.controller 'TasksEditCtrl',
-  ($http, $location, $routeParams, notification, tasks) ->
+  ($http, $location, $routeParams, notification, tasks, dateFilter) ->
     @page_title = 'Edit a Task'
     @showDeleteBtn = true
     @input = {}
@@ -10,7 +10,7 @@
       .then (response) =>
         @input.description = response.data.description
         @input.hour = response.data.hour
-        @input.date = new Date(response.data.date)
+        @input.date = dateFilter(new Date(response.data.date), 'MM/dd/yyyy')
 
     @delete = ($event) ->
       $event.preventDefault()

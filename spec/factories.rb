@@ -8,7 +8,7 @@ FactoryGirl.define do
 
   factory :task do
     description 'Test task description'
-    date '2014-12-31'
+    date '12/31/2014'
     hour 4
     user
   end

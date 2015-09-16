@@ -13,7 +13,7 @@ feature 'User manages tasks' do
     click_on 'Add a Task'
 
     fill_in 'Task', with: 'Sample task description'
-    fill_in 'Date', with: '2014-12-31'
+    fill_in 'Date', with: '12/31/2014'
     fill_in 'Hours', with: '4'
 
     click_on 'Submit'
@@ -32,7 +32,7 @@ feature 'User manages tasks' do
     expect(page).to have_field('Task', with: 'Test task desc')
 
     fill_in 'Task', with: 'Edited task description'
-    fill_in 'Date', with: '2014-12-31'
+    fill_in 'Date', with: '12/31/2014'
     fill_in 'Hours', with: '4'
 
     click_on 'Submit'
@@ -52,8 +52,8 @@ feature 'User manages tasks' do
   end
 
   scenario 'change task list order', js: true do
-    task_of_older = create :task, date: '2015-9-10', user: user
-    task_of_newer = create :task, date: '2015-9-11', user: user
+    task_of_older = create :task, date: '09/10/2015', user: user
+    task_of_newer = create :task, date: '09/11/2015', user: user
 
     visit '/tasks'
 
@@ -73,11 +73,11 @@ feature 'User manages tasks' do
   scenario 'see the list with overworking days highlighted', js: true do
     user.preferred_working_hour = 8
 
-    task_of_regular_day = create :task, hour: 3, date: '2015-9-10', user: user
+    task_of_regular_day = create :task, hour: 3, date: '09/10/2015', user: user
     task_1_of_over_working_day = create(:task,
-      hour: 5, date: '2015-9-11', user: user)
+      hour: 5, date: '09/11/2015', user: user)
     task_2_of_over_working_day = create(:task,
-      hour: 5, date: '2015-9-11', user: user)
+      hour: 5, date: '09/11/2015', user: user)
 
     visit '/tasks'
 
@@ -90,8 +90,8 @@ feature 'User manages tasks' do
   end
 
   scenario 'filters the list with from and to date', js: true do
-    task_out_of_range = create :task, date: '2014-09-01', user: user
-    task_in_range = create :task, date: '2015-09-01', user: user
+    task_out_of_range = create :task, date: '09/01/2014', user: user
+    task_in_range = create :task, date: '09/01/2015', user: user
 
     visit '/tasks'
 
@@ -101,10 +101,10 @@ feature 'User manages tasks' do
     expect(page).to have_css('table tbody tr',
       text: task_text(task_in_range))
     expect(page).not_to have_css('table tbody tr',
-      text: task_text(task_in_range))
+      text: task_text(task_out_of_range))
   end
 
   def task_text(task)
-    "#{task.description} #{task.date.strftime('%m-%d-%Y')} #{task.hour}"
+    "#{task.description} #{task.date.strftime('%m/%d/%Y')} #{task.hour}"
   end
 end

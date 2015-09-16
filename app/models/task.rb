@@ -5,12 +5,9 @@ class Task < ActiveRecord::Base
     order(date: :desc)
   end
 
-  # def date=(date_with_time_zone)
-  #   # 2014-01-31T15:00:00.000Z
-  #   converted_date = Date.strptime(date_with_time_zone, '%d-%m-%Y')
-  #
-  #   super(converted_date)
-  # end
+  def date=(date_in_text)
+    super Date.strptime(date_in_text, '%m/%d/%Y')
+  end
 
   def total_hour
     self.class.where(user_id: user_id, date: date).sum(:hour)
