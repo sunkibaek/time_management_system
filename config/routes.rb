@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root 'homes#show'
 
-  %w(/log_in /sign_up /tasks /tasks/new /tasks/edit/:id /settings).each do |path|
+  %w(/log_in /sign_up /tasks /tasks/new /tasks/edit/:id \
+       /tasks/export/:from/:to /settings).each do |path|
     get path, to: 'homes#show'
   end
 

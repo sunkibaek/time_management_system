@@ -1,0 +1,26 @@
+<div class="well">
+  <samp>
+    <ul>
+      <li>
+        Date: from {{ tasksExport.from | date : 'MM/dd/yyyy' }}
+        to {{ tasksExport.to | date : 'MM/dd/yyyy' }}
+      </li>
+
+      <li>Total time: {{ tasksExport.grandTotalHour }}h</li>
+
+      <li>
+        Notes:
+
+        <span ng-show="tasksExport.tasks.length == 0">
+          No task found.
+        </span>
+
+        <ol>
+          <li ng-repeat="task in tasksExport.tasks">
+            {{ task.description }}
+          </li>
+        </ol>
+      </li>
+    </ul>
+  </samp>
+</div>

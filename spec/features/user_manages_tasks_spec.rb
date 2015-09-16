@@ -108,6 +108,8 @@ feature 'User manages tasks' do
   scenario 'exports the filtered list', js: true do
     task_out_of_range = create :task, date: '09/01/2014', user: user
     task_in_range = create :task, date: '09/01/2015', user: user
+    another_task_in_range = create :task, date: '09/02/2015', user: user
+    total_hour = task_in_range.hour + another_task_in_range.hour
 
     visit '/tasks'
 
@@ -116,11 +118,11 @@ feature 'User manages tasks' do
 
     click_on 'Export'
 
-    expect(page).not_to have_css('a', text: 'Time Management System')
-    expect(page).to have_css('table tbody tr',
-      text: task_text(task_in_range))
-    expect(page).not_to have_css('table tbody tr',
-      text: task_text(task_out_of_range))
+    expect(page).to have_text('01/01/2015')
+    expect(page).to have_text('12/31/2015')
+    expect(page).to have_text("#{total_hour}h")
+    expect(page).to have_text(task_in_range.description)
+    expect(page).to have_text(another_task_in_range.description)
   end
 
   def task_text(task)

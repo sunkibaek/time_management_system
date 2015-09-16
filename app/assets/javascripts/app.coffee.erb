@@ -21,6 +21,10 @@
         templateUrl: "<%= asset_path('templates/tasks_form.html') %>"
         controller: 'TasksEditCtrl'
         controllerAs: 'task' }
+      .when '/tasks/export/:from/:to', {
+        templateUrl: "<%= asset_path('templates/tasks_export.html') %>"
+        controller: 'TasksExportCtrl'
+        controllerAs: 'tasksExport' }
       .when '/settings', {
         templateUrl: "<%= asset_path('templates/settings.html') %>"
         controller: 'SettingsCtrl'
