@@ -4,6 +4,7 @@
   dateTexts = ['Date &uarr;', 'Date &darr;']
   dateOrders = ['-date', 'date']
 
+  @input = {}
   @collection = tasks
   @dateText = dateTexts[0]
   @dateOrder = dateOrders[0]

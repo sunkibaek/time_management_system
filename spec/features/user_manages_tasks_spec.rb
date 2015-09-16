@@ -89,6 +89,21 @@ feature 'User manages tasks' do
       text: task_text(task_2_of_over_working_day))
   end
 
+  scenario 'filters the list with from and to date', js: true do
+    task_out_of_range = create :task, date: '2014-09-01', user: user
+    task_in_range = create :task, date: '2015-09-01', user: user
+
+    visit '/tasks'
+
+    fill_in 'From', with: '01/01/2015'
+    fill_in 'To', with: '12/31/2015'
+
+    expect(page).to have_css('table tbody tr',
+      text: task_text(task_in_range))
+    expect(page).not_to have_css('table tbody tr',
+      text: task_text(task_in_range))
+  end
+
   def task_text(task)
     "#{task.description} #{task.date.strftime('%m-%d-%Y')} #{task.hour}"
   end

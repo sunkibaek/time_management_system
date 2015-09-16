@@ -19,3 +19,7 @@
 .margin-above {
   margin-top: 2em;
 }
+
+.btn.pull-right + .btn.pull-right {
+  margin-right: 0.6em;
+}
