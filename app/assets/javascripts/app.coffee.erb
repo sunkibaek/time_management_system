@@ -6,7 +6,9 @@
       .when '/', {
         templateUrl: "<%= asset_path('templates/home.html') %>" }
       .when '/log_in', {
-        templateUrl: "<%= asset_path('templates/log_in.html') %>" }
+        templateUrl: "<%= asset_path('templates/log_in.html') %>"
+        controller: 'LogInCtrl'
+        controllerAs: 'logIn' }
       .when '/sign_up', {
         templateUrl: "<%= asset_path('templates/sign_up.html') %>" }
       .when '/tasks', {
