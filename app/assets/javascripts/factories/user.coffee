@@ -9,6 +9,7 @@
     .then (response) =>
       @name = response.data.name
       @preferredWorkingHour = response.data.preferred_working_hour
+      @isUserManager = response.data['user_manager?']
       @isLoggedIn = @name? ? true : false
 
   @update()

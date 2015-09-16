@@ -28,6 +28,7 @@ module Api
         if signed_in?
           render json:
             { name: current_user.name,
+              user_manager?: current_user.user_manager?,
               preferred_working_hour: current_user.preferred_working_hour
             }, status: 200
         else
