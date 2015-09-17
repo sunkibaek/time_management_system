@@ -1,0 +1,53 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Time Management System</a>
+    </div>
+
+    <ul class="nav navbar-nav">
+      <li
+        ng-class="{ active: '/tasks' == main.currentPath }"
+        ng-show="main.user.isLoggedIn">
+        <a href="/tasks">Tasks</a>
+      </li>
+
+      <li
+        ng-class="{ active: '/admin/users' == main.currentPath }"
+        ng-if="main.user.isUserManager">
+        <a href="/admin/users">Users</a>
+      </li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li ng-show="!main.user.isLoggedIn">
+        <a href="/sign_up">Sign Up</a>
+      </li>
+
+      <li ng-show="!main.user.isLoggedIn">
+        <a href="/log_in">Log In</a>
+      </li>
+
+      <li ng-show="main.user.isLoggedIn" class="disabled">
+        <a href="#"><i>Logged in as <b>{{ main.user.name }}</b></i></a>
+      </li>
+
+      <li
+        ng-class="{ active: '/settings' == main.currentPath }"
+        ng-show="main.user.isLoggedIn">
+        <a href="/settings">
+          Preferred working hour:
+          <b>{{ main.user.preferredWorkingHour }}</b>
+        </a>
+      </li>
+
+      <li ng-show="main.user.isLoggedIn">
+        <a
+          href="#"
+          ng-controller="LogOutCtrl as logOut"
+          ng-click="logOut.logOut()">
+          Log Out
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
