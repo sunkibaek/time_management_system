@@ -4,8 +4,9 @@
 
     <form
       class="form-horizontal margin-above"
+      name="settingsForm"
       ng-submit="settings.submit($event)">
-      <div class="form-group">
+      <div class="form-group" ng-class="{ 'has-error' : settingsForm.preferred_working_hour.$invalid && !settingsForm.preferred_working_hour.$pristine }">
         <label for="preferred_working_hour" class="control-label col-sm-2">Preferred Working Hour</label>
 
         <div class="col-sm-10">
@@ -14,7 +15,8 @@
             id="preferred_working_hour"
             name="preferred_working_hour"
             class="form-control"
-            ng-model="settings.input.preferredWorkingHour">
+            ng-model="settings.input.preferredWorkingHour"
+            required>
         </div>
       </div>
 
@@ -24,6 +26,7 @@
             type="submit"
             name="Submit"
             value="Submit"
+            ng-disabled="settingsForm.$invalid"
             class="btn btn-primary">
         </div>
       </div>
