@@ -10,6 +10,16 @@ describe Task do
     end
   end
 
+  describe '#date=' do
+    it 'accepts date in text for date column' do
+      task = build :task
+
+      task.date = '12/31/2014'
+
+      expect(task.date).to eq Date.new(2014, 12, 31)
+    end
+  end
+
   describe '#total_hour' do
     it 'sums up total hour for the date by the user' do
       user = create :user
