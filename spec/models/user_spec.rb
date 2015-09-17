@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 describe User do
+  describe '.order_by_id_desc' do
+    it 'returns users list in descending order of id' do
+      first_user = create :user
+      last_user = create :user
+
+      expect(User.order_by_id_desc).to eq [last_user, first_user]
+    end
+  end
+
   describe '#user_manager?' do
     it 'determines if user is user manager or not' do
       regular_user = create :user
