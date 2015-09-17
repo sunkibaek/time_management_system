@@ -48,6 +48,9 @@ feature 'User manages tasks' do
 
     click_on 'Delete'
 
+    # accept confirmationd dialog box
+    page.driver.browser.switch_to.alert.accept
+
     expect(page).to have_text('Task successfully deleted.')
   end
 
