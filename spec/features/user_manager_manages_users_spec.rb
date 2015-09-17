@@ -1,26 +1,26 @@
 require 'rails_helper'
 
 feature 'User manager manages users' do
-  let!(:regular_user) { create :user, name: 'Regular User' }
   let!(:user_manager) { create :user, roles: ['regular', 'user_manager'] }
-
-  before do
-    sign_in user_manager
-  end
+  let!(:regular_user) { create :user, name: 'Regular User' }
 
   scenario 'can see users menu', js: true do
+    sign_in user_manager
+
     visit '/'
 
-    expect(page).to have_css('a', text: 'Users', visible: true)
+    expect(page).to have_css('a', text: 'Users manage', visible: true)
 
     sign_out
 
     sign_in regular_user
 
-    expect(page).to have_css('a', text: 'Users', visible: false)
+    expect(page).to have_css('a', text: 'Users manage', visible: false)
   end
 
   scenario 'can visit user manage page', js: true do
+    sign_in user_manager
+
     visit '/admin/users'
 
     expect(page).to have_css('h1', text: 'User management')
@@ -35,9 +35,11 @@ feature 'User manager manages users' do
   end
 
   scenario 'changes settings of other users', js: true do
+    sign_in user_manager
+
     visit '/admin/users'
 
-    within 'table tbody tr:last-of-type' do
+    within 'table tbody tr', match: :first do
       expect(page).to have_css('td', text: 'Regular User')
 
       fill_in 'preferred_working_hour', with: 4
