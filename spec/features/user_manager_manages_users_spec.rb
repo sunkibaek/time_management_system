@@ -37,11 +37,13 @@ feature 'User manager manages users' do
   scenario 'changes settings of other users', js: true do
     visit '/admin/users'
 
-    expect(page).to have_css('table tbody tr td', text: 'Regular User')
+    within 'table tbody tr:last-of-type' do
+      expect(page).to have_css('td', text: 'Regular User')
 
-    fill_in 'Preferred Working Hour', with: 4
+      fill_in 'preferred_working_hour', with: 4
 
-    click_on 'Save'
+      click_on 'Save'
+    end
 
     expect(page).to have_text('User account successfully updated.')
   end

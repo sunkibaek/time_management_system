@@ -26,4 +26,34 @@ describe Api::V1::Admin::UsersController do
       end
     end
   end
+
+  describe '#update' do
+    context 'logged in as a regular user' do
+      it 'returns 403 error' do
+        sign_in regular_user
+
+        patch :update,
+          { id: 123,
+            user: { preferred_working_hour: 4 },
+            format: :json }
+
+        expect(response.status).to eq 403
+      end
+    end
+
+    context 'logged in as a user manager' do
+      it 'returns users collection' do
+        sign_in user_manager
+
+        patch :update,
+          { id: regular_user.id,
+            user: { preferred_working_hour: 4 },
+            format: :json }
+
+        expect(response.status).to eq 200
+        expect(response.body).to eq(
+          { notice: Api::V1::Admin::UsersController::MSG[:update] }.to_json)
+      end
+    end
+  end
 end

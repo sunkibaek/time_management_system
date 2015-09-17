@@ -7,18 +7,47 @@
     </td>
 
     <td>
+      Sign up date
+    </td>
+
+    <td>
       Preferred Working Hour
     </td>
   </thead>
 
   <tbody>
-    <tr ng-repeat="user in adminUsers.all ">
+    <tr ng-repeat="user in adminUsers.all | orderBy: user.id ">
       <td>
         {{ user.name }}
       </td>
 
       <td>
-        {{ user.preferred_working_hour }}
+        {{ user.created_at | date : 'MM-dd-yyyy'}}
+      </td>
+
+      <td class="col-lg-3">
+        <div class="row">
+          <div class="col-lg-6">
+            <form name="preferredWorkingHourForm" ng-submit="adminUsers.submit(user)" novalidate>
+              <div class="input-group">
+                <input
+                  type="number"
+                  name="preferred_working_hour"
+                  id="preferred_working_hour" ng-model="user.preferred_working_hour"
+                  class="form-control"
+                  required>
+
+                <span class="input-group-btn">
+                  <input
+                    type="submit"
+                    name="submit"
+                    value="Save"
+                    class="btn btn-default" ng-disabled="preferredWorkingHourForm.$invalid">
+                </span>
+              </div>
+            </form>
+          </div>
+        </div>
       </td>
     </tr>
   </tbody>
