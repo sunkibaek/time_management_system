@@ -10,6 +10,7 @@
       @name = response.data.name
       @preferredWorkingHour = response.data.preferred_working_hour
       @isUserManager = response.data['user_manager?']
+      @isAdmin = response.data['admin?']
       @isLoggedIn = @name? ? true : false
 
   @update()
