@@ -62,6 +62,7 @@ describe Api::V1::UsersController do
         expect(response.body).to eq(
           { name: user.name,
             user_manager?: false,
+            admin?: false,
             preferred_working_hour: user.preferred_working_hour
           }.to_json)
       end

@@ -1,4 +1,5 @@
 json.tasks @tasks do |task|
+  json.id task.id
   json.description task.description
   json.date task.date
   json.hour task.hour

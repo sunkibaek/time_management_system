@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
       namespace :admin do
         resources :users, only: [:index, :update]
-        resources :tasks, only: [:index]
+        resources :tasks, only: [:index, :update, :update, :show, :destroy]
       end
     end
   end
