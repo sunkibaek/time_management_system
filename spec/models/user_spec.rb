@@ -19,4 +19,16 @@ describe User do
       expect(user_manager.user_manager?).to eq true
     end
   end
+
+  describe '#admin?' do
+    it 'determines if user is admin or not' do
+      regular_user = create :user
+      user_manager = create :user_manager
+      admin = create :admin
+
+      expect(regular_user.admin?).to eq false
+      expect(user_manager.admin?).to eq false
+      expect(admin.admin?).to eq true
+    end
+  end
 end
