@@ -11,7 +11,8 @@ feature 'User edits preferred working hour' do
     visit '/tasks'
 
     within 'nav' do
-      page.find('li a b', text: user.preferred_working_hour).click
+      page.find('.preferred-working-hour a b',
+        text: user.preferred_working_hour).click
     end
 
     expect(page).to have_field('Preferred Working Hour',
