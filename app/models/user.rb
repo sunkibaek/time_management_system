@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
   def user_manager?
     roles.include? 'user_manager'
   end
+
+  def admin?
+    roles.include? 'admin'
+  end
 end
