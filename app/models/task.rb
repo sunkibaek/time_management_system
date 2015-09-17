@@ -7,6 +7,10 @@ class Task < ActiveRecord::Base
     order(date: :desc)
   end
 
+  def self.with_users
+    includes(:user)
+  end
+
   def date=(date_in_text)
     super Date.strptime(date_in_text, '%m/%d/%Y')
   end
