@@ -15,6 +15,14 @@ FactoryGirl.define do
     roles ['regular', 'user_manager']
   end
 
+  factory :admin, class: User do
+    name 'Admin'
+    email 'admin@example.com'
+    preferred_working_hour 8
+    password_digest 'testPassword'
+    roles ['regular', 'user_manager', 'admin']
+  end
+
   factory :task do
     description 'Test task description'
     date '12/31/2014'
