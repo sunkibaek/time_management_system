@@ -1,6 +1,8 @@
 class Task < ActiveRecord::Base
   belongs_to :user
 
+  delegate :name, :preferred_working_hour, to: :user, prefix: true
+
   def self.order_by_date_desc
     order(date: :desc)
   end
