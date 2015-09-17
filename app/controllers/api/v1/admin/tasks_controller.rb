@@ -31,7 +31,7 @@ module Api
             task.update(task_params)
             render json: { notice: MSG[:update] }, status: 200
           else
-            render json: {}, status: 400
+            render json: {}, status: 403
           end
         end
 
@@ -41,7 +41,7 @@ module Api
             task.destroy
             render json: { notice: MSG[:destroy] }, status: 200
           else
-            render json: {}, status: 400
+            render json: {}, status: 403
           end
         end
 
