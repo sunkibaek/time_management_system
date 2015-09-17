@@ -1,0 +1,27 @@
+<h1>Tasks management</h1>
+
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>User (PWH)</th>
+        <th>Task</th>
+        <th>Date</th>
+        <th>Total hours</th>
+        <th>Hours</th>
+        <th>Created date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="task in adminTasks.collection.all | orderBy: task.date">
+        <td>{{ task.userName}} ({{ task.userPreferredWorkingHour }})</td>
+        <td><a href="/tasks/edit/{{ task.id }}">{{ task.description }}</a></td>
+        <td>{{ task.date | date : 'MM/dd/yyyy' }}</td>
+        <td>{{ task.totalHour }}</td>
+        <td>{{ task.hour }}</td>
+        <td>{{ task.createdAt | date : 'MM/dd/yyyy' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

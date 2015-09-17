@@ -37,6 +37,10 @@
         templateUrl: "<%= asset_path('templates/admin/users.html') %>"
         controller: 'AdminUsersCtrl'
         controllerAs: 'adminUsers' }
+      .when '/admin/tasks', {
+        templateUrl: "<%= asset_path('templates/admin/tasks.html') %>"
+        controller: 'AdminTasksCtrl'
+        controllerAs: 'adminTasks' }
       .otherwise {
         redirectTo: '/' }
 
