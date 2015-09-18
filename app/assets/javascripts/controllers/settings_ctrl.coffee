@@ -1,6 +1,6 @@
 'use strict'
 
-@app.controller 'SettingsCtrl', ($http, $location, user, notification, tasks) ->
+@app.controller 'SettingsCtrl', ($http, $location, user, notification, tasks, headerConfig) ->
   @input = {}
 
   @submit = ($event) ->
@@ -9,7 +9,7 @@
       user:
         preferred_working_hour: @input.preferredWorkingHour
 
-    $http.patch 'api/v1/users/0', data
+    $http headers: headerConfig.config, method: 'PATCH', url: 'api/v1/users/0', data: data
       .then (response) ->
         user.update()
         tasks.update()

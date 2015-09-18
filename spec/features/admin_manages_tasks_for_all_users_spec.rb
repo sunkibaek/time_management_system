@@ -7,11 +7,11 @@ feature 'Admin manages tasks for all users' do
       description: 'Task of other user', user: user
     admin = create :admin
 
-    sign_in admin
+    request_header_with admin.auth_token
 
     visit '/'
 
-    click_on 'Tasks manage'
+    click_on 'Manage tasks'
 
     expect(page).to have_text(task_of_other_user.description)
   end
@@ -22,7 +22,7 @@ feature 'Admin manages tasks for all users' do
       description: 'Task of other user', user: user
     admin = create :admin
 
-    sign_in admin
+    request_header_with admin.auth_token
 
     visit '/admin/tasks'
 
@@ -42,14 +42,14 @@ feature 'Admin manages tasks for all users' do
       description: 'Task of other user', user: user
     admin = create :admin
 
-    sign_in admin
+    request_header_with admin.auth_token
 
     visit "/tasks/edit/#{task_of_other_user.id}"
 
     click_on 'Delete'
 
     # accept confirmationd dialog box
-    page.driver.browser.switch_to.alert.accept
+    # page.driver.browser.switch_to.alert.accept
 
     expect(page).to have_text('Task successfully deleted.')
   end

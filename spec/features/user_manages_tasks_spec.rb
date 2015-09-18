@@ -4,7 +4,7 @@ feature 'User manages tasks' do
   let!(:user) { create :user }
 
   before do
-    sign_in user
+    request_header_with user.auth_token
   end
 
   scenario 'adds a new task', js: true do
@@ -48,9 +48,6 @@ feature 'User manages tasks' do
 
     click_on 'Delete'
 
-    # accept confirmationd dialog box
-    page.driver.browser.switch_to.alert.accept
-
     expect(page).to have_text('Task successfully deleted.')
   end
 
@@ -85,11 +82,11 @@ feature 'User manages tasks' do
 
     visit '/tasks'
 
-    expect(page).to have_css('table tbody tr.danger',
+    expect(page).to have_css('table tbody tr.success',
       text: task_text(task_of_less_working_day))
-    expect(page).to have_css('table tbody tr.success',
+    expect(page).to have_css('table tbody tr.danger',
       text: task_text(task_1_of_regular_day))
-    expect(page).to have_css('table tbody tr.success',
+    expect(page).to have_css('table tbody tr.danger',
       text: task_text(task_2_of_regular_day))
   end
 

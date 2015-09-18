@@ -1,23 +1,22 @@
 module Api
   module V1
-    class SessionsController < ApplicationController
+    class SessionsController < ApiBaseController
+      skip_before_action :authorize, only: [:create]
+
       MSG = { success: 'Successfully logged in.',
         error: 'There was an error loggin in.',
         destroy: 'Successfully logged out.' }
 
       def create
-        user = authenticate_session(session_params)
+        user = authenticate(
+          User.find_by(email: session_params[:email]),
+          session_params[:password])
 
-        if sign_in(user)
-          render json: { notice: MSG[:success] }, status: 200
+        if user
+          render json: { auth_token: user.auth_token, notice: MSG[:success] }, status: 200
         else
           render json: { notice: MSG[:error] }, status: 400
         end
-      end
-
-      def destroy
-        sign_out
-        render json: { notice: MSG[:destroy] }, status: 200
       end
 
       private

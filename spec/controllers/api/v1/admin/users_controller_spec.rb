@@ -7,7 +7,7 @@ describe Api::V1::Admin::UsersController do
   describe '#index' do
     context 'logged in as a regular user' do
       it 'returns 403 error' do
-        sign_in regular_user
+        authorize_with regular_user.auth_token
 
         get :index, format: :json
 
@@ -17,7 +17,7 @@ describe Api::V1::Admin::UsersController do
 
     context 'logged in as a user manager' do
       it 'returns users collection' do
-        sign_in user_manager
+        authorize_with user_manager.auth_token
 
         get :index, format: :json
 
@@ -30,7 +30,7 @@ describe Api::V1::Admin::UsersController do
   describe '#update' do
     context 'logged in as a regular user' do
       it 'returns 403 error' do
-        sign_in regular_user
+        authorize_with regular_user.auth_token
 
         patch :update,
           { id: 123,
@@ -43,7 +43,7 @@ describe Api::V1::Admin::UsersController do
 
     context 'logged in as a user manager' do
       it 'returns users collection' do
-        sign_in user_manager
+        authorize_with user_manager.auth_token
 
         patch :update,
           { id: regular_user.id,

@@ -1,14 +1,16 @@
 'use strict'
 
-@app.controller 'SignUpCtrl', ($http, $location, notification, user, tasks) ->
+@app.controller 'SignUpCtrl', ($http, $location, notification, user, tasks, authToken, headerConfig) ->
   @input = {}
 
   @submit = ($event) ->
     $event.preventDefault()
     data = { user: { name: @input.name, email: @input.email, password: @input.password } }
 
-    $http.post '/api/v1/users', data
+    $http method: 'POST', url: '/api/v1/users', data: data
       .then (response) ->
+        authToken.saveToken response.data.auth_token
+        headerConfig.update()
         user.update()
         tasks.update()
         $location.path('/tasks').replace()

@@ -1,16 +1,17 @@
 module Api
   module V1
-    class UsersController < ApplicationController
+    class UsersController < ApiBaseController
+      skip_before_action :authorize, only: [:create]
+
       MSG = { success: 'User account successfully created.',
               update: 'User account successfully updated.',
               error: 'There was an error processing it.' }
 
       def create
-        @user = sign_up(user_params)
+        user = sign_up(user_params)
 
-        if @user.valid?
-          sign_in(@user)
-          flash[:notice] = MSG[:success]
+        if user.valid?
+          render json: { auth_token: user.auth_token, notice: MSG[:success] }
         else
           render json: { notice: MSG[:error] }, status: 400
         end
@@ -21,19 +22,6 @@ module Api
           render json: { notice: MSG[:update] }, status: 200
         else
           render json: { notice: MSG[:error] }, status: 400
-        end
-      end
-
-      def me
-        if signed_in?
-          render json:
-            { name: current_user.name,
-              user_manager?: current_user.user_manager?,
-              admin?: current_user.admin?,
-              preferred_working_hour: current_user.preferred_working_hour
-            }, status: 200
-        else
-          render json: {}, status: 200
         end
       end
 

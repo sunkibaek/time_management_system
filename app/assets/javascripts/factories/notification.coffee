@@ -8,6 +8,6 @@
 
     $timeout =>
       @message = ''
-    , 4000
+    , 2000
 
   return this

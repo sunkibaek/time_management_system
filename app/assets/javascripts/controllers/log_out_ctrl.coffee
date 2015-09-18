@@ -1,14 +1,12 @@
 'user strict'
 
-@app.controller 'LogOutCtrl', ($http, $location, notification, user) ->
-  @logOut = ->
-    $http.delete '/api/v1/session'
-    .then (response) ->
-      user.update()
-      notification.updateMessage response.data.notice
+@app.controller 'LogOutCtrl',
+  ($location, notification, user, tasks, authToken) ->
+    @logOut = ->
+      authToken.removeToken()
+      user.initialize()
+      tasks.initialize()
       $location.path('/').replace()
-    , (response) ->
-      user.update()
-      notification.updateMessage response.data.notice
+      notification.updateMessage 'Successfully logged out.'
 
-  return this
+    return this

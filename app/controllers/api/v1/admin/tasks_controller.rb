@@ -1,7 +1,7 @@
 module Api
   module V1
     module Admin
-      class TasksController < ApplicationController
+      class TasksController < ApiBaseController
         MSG = { success: 'Task successfully added.',
                 update: 'Task successfully edited.',
                 destroy: 'Task successfully deleted.',

@@ -1,14 +1,20 @@
 'user strict'
 
-@app.controller 'AdminTasksCtrl', ($http) ->
-  @collection =
-    all: []
+@app.controller 'AdminTasksCtrl',
+  ($http, $location, headerConfig, user, notification) ->
+    if !user.isadmin
+      $location.path('/').replace()
+      notification.updateMessage 'Unauthorized access is prohibited.'
+      return
 
-  @update = ->
-    $http.get 'api/v1/admin/tasks'
-      .then (response) =>
-        @collection.all = response.data.tasks
+    @collection =
+      all: []
 
-  @update()
+    @update = ->
+      $http headers: headerConfig.config, method: 'GET', url: 'api/v1/admin/tasks'
+        .then (response) =>
+          @collection.all = response.data.tasks
 
-  return this
+    @update()
+
+    return this

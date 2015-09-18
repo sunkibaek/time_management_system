@@ -1,7 +1,7 @@
 'use strict'
 
 @app = angular.module 'projectApp', ['ngSanitize', 'ngRoute']
-  .config ($routeProvider, $locationProvider) ->
+  .config ($routeProvider, $locationProvider, $httpProvider) ->
     $routeProvider
       .when '/', {
         templateUrl: "<%= asset_path('templates/home.html') %>" }
@@ -45,3 +45,5 @@
         redirectTo: '/' }
 
     $locationProvider.html5Mode(true)
+
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'

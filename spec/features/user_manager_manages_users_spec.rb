@@ -5,29 +5,27 @@ feature 'User manager manages users' do
   let!(:regular_user) { create :user, name: 'Regular User' }
 
   scenario 'can see users menu', js: true do
-    sign_in user_manager
+    request_header_with user_manager.auth_token
 
     visit '/'
 
-    expect(page).to have_css('a', text: 'Users manage', visible: true)
+    expect(page).to have_css('a', text: 'Manage users', visible: true)
 
-    sign_out
+    request_header_with regular_user.auth_token
 
-    sign_in regular_user
+    visit '/'
 
-    expect(page).to have_css('a', text: 'Users manage', visible: false)
+    expect(page).not_to have_css('a', text: 'Manage users')
   end
 
   scenario 'can visit user manage page', js: true do
-    sign_in user_manager
+    request_header_with user_manager.auth_token
 
     visit '/admin/users'
 
     expect(page).to have_css('h1', text: 'User management')
 
-    sign_out
-
-    sign_in regular_user
+    request_header_with regular_user.auth_token
 
     visit '/admin/users'
 
@@ -35,7 +33,7 @@ feature 'User manager manages users' do
   end
 
   scenario 'changes settings of other users', js: true do
-    sign_in user_manager
+    request_header_with user_manager.auth_token
 
     visit '/admin/users'
 

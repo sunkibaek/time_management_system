@@ -12,6 +12,7 @@ gem 'monban'
 gem 'monban-generators'
 gem 'pg'
 gem 'rails', '4.2.4'
+gem 'responders'
 gem 'sass-rails'
 gem 'uglifier'
 
@@ -31,6 +32,6 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
-  gem 'selenium-webdriver'
+  gem 'poltergeist'
   gem 'shoulda-matchers', require: false
 end

@@ -6,7 +6,9 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
+require 'capybara/poltergeist'
 require 'shoulda/matchers'
+require 'helpers'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -29,9 +31,11 @@ require 'shoulda/matchers'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 Capybara.default_selector = :css
+Capybara.javascript_driver = :poltergeist
 Monban.test_mode!
 
 RSpec.configure do |config|
+  config.include Helpers
   config.include FactoryGirl::Syntax::Methods
   config.include Monban::Test::Helpers, type: :feature
   config.include Monban::Test::ControllerHelpers, type: :controller

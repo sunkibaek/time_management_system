@@ -1,6 +1,6 @@
 'use strict'
 
-@app.controller 'TasksCtrl', (tasks, $location) ->
+@app.controller 'TasksCtrl', (tasks, $location, authToken) ->
   dateTexts = ['Date &uarr;', 'Date &darr;']
   dateOrders = ['-date', 'date']
 

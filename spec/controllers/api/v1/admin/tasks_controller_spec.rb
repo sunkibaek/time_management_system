@@ -8,7 +8,7 @@ describe Api::V1::Admin::TasksController do
       it 'fetches tasks for all users' do
         user = create :user
         admin = create :admin
-        sign_in admin
+        authorize_with admin.auth_token
 
         create :task, user: user
 
@@ -23,7 +23,7 @@ describe Api::V1::Admin::TasksController do
       it 'gets 403 error' do
         user = create :user
 
-        sign_in user
+        authorize_with user.auth_token
 
         subject
 
@@ -40,7 +40,7 @@ describe Api::V1::Admin::TasksController do
       it 'fetches task info in json' do
         admin = create :admin
 
-        sign_in admin
+        authorize_with admin.auth_token
 
         subject
 
@@ -53,7 +53,7 @@ describe Api::V1::Admin::TasksController do
       it 'gets 403 error' do
         user = create :user
 
-        sign_in user
+        authorize_with user.auth_token
 
         subject
 
@@ -75,7 +75,7 @@ describe Api::V1::Admin::TasksController do
       it 'updates the task' do
         admin = create :admin
 
-        sign_in admin
+        authorize_with admin.auth_token
 
         subject
 
@@ -89,7 +89,7 @@ describe Api::V1::Admin::TasksController do
       it 'gets 403 error' do
         user = create :user
 
-        sign_in user
+        authorize_with user.auth_token
 
         subject
 
@@ -106,7 +106,7 @@ describe Api::V1::Admin::TasksController do
       it 'deletes the task' do
         admin = create :admin
 
-        sign_in admin
+        authorize_with admin.auth_token
 
         subject
 
@@ -120,7 +120,7 @@ describe Api::V1::Admin::TasksController do
       it 'gets 403 error' do
         user = create :user
 
-        sign_in user
+        authorize_with user.auth_token
 
         subject
 

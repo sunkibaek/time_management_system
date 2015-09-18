@@ -1,27 +1,20 @@
 module Api
   module V1
-    class TasksController < ApplicationController
+    class TasksController < ApiBaseController
       MSG = { success: 'Task successfully added.',
               update: 'Task successfully edited.',
               destroy: 'Task successfully deleted.',
               index: 'Tasks list updated.' }
 
       def index
-        @tasks = if signed_in?
-                   current_user.tasks.order_by_date_desc
-                 else
-                   Task.none
-                 end
+        @tasks = current_user.tasks.order_by_date_desc
+
         flash[:notice] = MSG[:index]
         render status: 200
       end
 
       def show
-        @task = if signed_in?
-                  current_user.tasks.find(params[:id])
-                else
-                  Task.none
-                end
+        @task = current_user.tasks.find(params[:id])
 
         render status: 200
       end
@@ -32,7 +25,7 @@ module Api
         if task.save
           render json: { notice: MSG[:success] }, status: 200
         else
-          render json: {}, status: 400
+          render nothing: true, status: 400
         end
       end
 
@@ -42,7 +35,7 @@ module Api
         if task.update(task_params)
           render json: { notice: MSG[:update] }, status: 200
         else
-          render json: {}, status: 400
+          render nothing: true, status: 400
         end
       end
 
@@ -52,7 +45,7 @@ module Api
         if task.destroy
           render json: { notice: MSG[:destroy] }, status: 200
         else
-          render json: {}, status: 400
+          render nothing: true, status: 400
         end
       end
 

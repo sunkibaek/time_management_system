@@ -6,7 +6,7 @@ describe Api::V1::TasksController do
 
     it 'fetches tasks for current user' do
       user = create :user
-      sign_in user
+      authorize_with user.auth_token
 
       3.times do
         create :task, user: user
@@ -26,7 +26,7 @@ describe Api::V1::TasksController do
     it 'fetches the task' do
       user = create :user
       task = create :task, user: user
-      sign_in user
+      authorize_with user.auth_token
 
       get :show, id: task.id, format: :json
 
@@ -47,9 +47,9 @@ describe Api::V1::TasksController do
 
     it 'creates a task' do
       user = create :user
-      sign_in user
+      authorize_with user.auth_token
 
-      expect{ subject }.to change{ user.tasks.size }.by 1
+      expect{ subject }.to change{ user.tasks.count }.by 1
       expect(response.status).to eq 200
       expect(response.body).to eq(
         { notice: Api::V1::TasksController::MSG[:success] }.to_json)

@@ -9,6 +9,7 @@
   updateCurrentPath = =>
     $rootScope.$on '$routeChangeSuccess', =>
       @currentPath = $location.path()
+      @user = user
 
   updateCurrentPath()
 

@@ -2,7 +2,7 @@
 
 @app.controller 'TasksEditCtrl',
   ($http, $location, $routeParams, $window, user, notification, tasks,
-    dateFilter) ->
+    dateFilter, headerConfig) ->
       @page_title = 'Edit a Task'
       @showDeleteBtn = true
       @input = {}
@@ -15,7 +15,7 @@
         redirectToUrl = '/tasks'
 
       @update = ->
-        $http.get urlBase + $routeParams.taskId
+        $http headers: headerConfig.config, method: 'GET', url: urlBase + $routeParams.taskId
           .then (response) =>
             @input.description = response.data.description
             @input.hour = response.data.hour
@@ -25,7 +25,7 @@
         $event.preventDefault()
         if $window.confirm('Are you sure?')
           url = urlBase + $routeParams.taskId
-          $http.delete url
+          $http headers: headerConfig.config, method: 'DELETE', url: url
             .then (response) =>
               tasks.update()
               @input = {}
@@ -44,7 +44,7 @@
 
         url = urlBase + $routeParams.taskId
 
-        $http.patch url, data
+        $http headers: headerConfig.config, method: 'PATCH', url: url, data: data
           .then (response) =>
             tasks.update()
             @input = {}

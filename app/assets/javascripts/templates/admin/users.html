@@ -7,6 +7,14 @@
     </th>
 
     <th>
+      Roles
+    </th>
+
+    <th>
+      Promote to
+    </th>
+
+    <th>
       Sign up date
     </th>
 
@@ -19,6 +27,15 @@
     <tr ng-repeat="user in adminUsers.all | orderBy: user.id ">
       <td>
         {{ user.name }}
+      </td>
+
+      <td>
+        {{ user.roles_in_text }}
+      </td>
+
+      <td>
+        <a ng-if="!user['admin?']" href="#" ng-click="adminUsers.promoteTo($event, user.id, 'admin')" class="btn btn-xs btn-default">ADMIN</a><br>
+        <a ng-if="!user['user_manager?']" href="#" ng-click="adminUsers.promoteTo($event, user.id, 'user_manager')" class="btn btn-xs btn-default">USER MGR</a>
       </td>
 
       <td>

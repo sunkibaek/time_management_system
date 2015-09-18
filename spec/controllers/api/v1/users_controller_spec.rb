@@ -12,9 +12,9 @@ describe Api::V1::UsersController do
 
       it 'creates an user account' do
         expect{ subject }.to change{ User.count }.by 1
-        expect(flash[:notice]).to eq Api::V1::UsersController::MSG[:success]
-        expect(response).to render_template('api/v1/users/create')
+
         expect(response.status).to eq 200
+        expect(JSON.parse(response.body).include?('auth_token')).to eq true
       end
     end
 
@@ -26,7 +26,7 @@ describe Api::V1::UsersController do
       end
 
       it 'returns an error message' do
-        expect{ subject }.to change(User, :count).by 0
+        expect{ subject }.to change{ User.count }.by 0
         expect(response.body).to eq(
           { notice: Api::V1::UsersController::MSG[:error] }.to_json)
         expect(response.status).to eq 400 # bad request
@@ -38,7 +38,7 @@ describe Api::V1::UsersController do
     context 'with valid input' do
       it 'updates preferred working hour with success notice' do
         user = create :user
-        sign_in user
+        authorize_with user.auth_token
 
         patch :update,
           { id: 0, user: { preferred_working_hour: 4 }, format: :json }
@@ -46,34 +46,6 @@ describe Api::V1::UsersController do
         expect(response.status).to eq 200
         expect(response.body).to eq(
           { notice: Api::V1::UsersController::MSG[:update] }.to_json)
-      end
-    end
-  end
-
-  describe '#me' do
-    context 'when logged in' do
-      it 'returns currently logged in user' do
-        user = create :user
-        sign_in user
-
-        get :me, format: :json
-
-        expect(response.status).to eq 200
-        expect(response.body).to eq(
-          { name: user.name,
-            user_manager?: false,
-            admin?: false,
-            preferred_working_hour: user.preferred_working_hour
-          }.to_json)
-      end
-    end
-
-    context 'when not logged in' do
-      it 'returns empty hash' do
-        get :me, format: :json
-
-        expect(response.status).to eq 200
-        expect(response.body).to eq({}.to_json)
       end
     end
   end
