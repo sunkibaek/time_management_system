@@ -4,7 +4,7 @@ feature 'User edits preferred working hour' do
   let!(:user) { create :user }
 
   before do
-    sign_in user
+    request_header_with user.auth_token
   end
 
   scenario 'sees PWH in nav bar and navigates to settings', js: true do

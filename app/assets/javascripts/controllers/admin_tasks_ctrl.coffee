@@ -2,7 +2,7 @@
 
 @app.controller 'AdminTasksCtrl',
   ($http, $location, headerConfig, user, notification) ->
-    if !user.isadmin
+    if !user.isAdmin
       $location.path('/').replace()
       notification.updateMessage 'Unauthorized access is prohibited.'
       return

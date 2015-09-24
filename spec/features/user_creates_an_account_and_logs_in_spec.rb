@@ -29,7 +29,7 @@ feature "User creates an account and logs in" do
       click_on 'Log In'
     end
 
-    expect(page).to have_css 'h2', text: 'Log In', visible: true
+    expect(page).to have_css 'h2', text: 'Log In'
 
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password_digest
@@ -42,7 +42,7 @@ feature "User creates an account and logs in" do
 
   scenario 'logs out', js: true do
     user = create :user
-    sign_in user
+    request_header_with user.auth_token
 
     visit '/tasks'
 
@@ -50,8 +50,8 @@ feature "User creates an account and logs in" do
 
     click_on 'Log Out'
 
-    expect(page).to have_no_css 'li a', text: user.name
-    expect(page).to have_no_css 'li a', text: 'Log Out'
+    expect(page).not_to have_css 'li a', text: user.name
+    expect(page).not_to have_css 'li a', text: 'Log Out'
     expect(page).to have_text('Successfully logged out.')
   end
 end

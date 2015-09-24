@@ -20,7 +20,7 @@
       user:
         preferred_working_hour: user.preferred_working_hour
 
-    $http headers: headerConfig.config, method: 'PATCH', url: '/api/v1/admin/users/' + user.id, data: data
+    $http headers: headerConfig.config, method: 'PUT', url: '/api/v1/admin/users/' + user.id, data: data
       .then (response) =>
         @update()
         notification.updateMessage response.data.notice
@@ -29,7 +29,7 @@
 
   @promoteTo = ($event, user_id, role) ->
     $event.preventDefault()
-    $http headers: headerConfig.config, method: 'PATCH', url: '/api/v1/admin/users/' + user_id, data: { promote_to: role }
+    $http headers: headerConfig.config, method: 'PUT', url: '/api/v1/admin/users/' + user_id, data: { promote_to: role }
       .then (response) =>
         @update()
         notification.updateMessage response.data.notice

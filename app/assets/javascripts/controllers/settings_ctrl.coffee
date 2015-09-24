@@ -9,7 +9,7 @@
       user:
         preferred_working_hour: @input.preferredWorkingHour
 
-    $http headers: headerConfig.config, method: 'PATCH', url: 'api/v1/users/0', data: data
+    $http headers: headerConfig.config, method: 'PUT', url: 'api/v1/users/0', data: data
       .then (response) ->
         user.update()
         tasks.update()

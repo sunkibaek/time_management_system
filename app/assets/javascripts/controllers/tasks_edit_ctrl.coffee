@@ -44,7 +44,9 @@
 
         url = urlBase + $routeParams.taskId
 
-        $http headers: headerConfig.config, method: 'PATCH', url: url, data: data
+        # Using PUT instead PATCH here to bypass a bug in test framework
+        # https://github.com/thoughtbot/capybara-webkit/issues/553
+        $http headers: headerConfig.config, method: 'PUT', url: url, data: data
           .then (response) =>
             tasks.update()
             @input = {}

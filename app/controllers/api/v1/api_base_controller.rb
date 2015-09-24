@@ -6,14 +6,6 @@ module Api
       before_action :authorize
       respond_to :json
 
-      # def current_user
-      #   if signed_in?
-      #     super
-      #   else
-      #     @current_user
-      #   end
-      # end
-
       def authorize
         unless signed_in?
           authenticate_token || render_unauthorized
