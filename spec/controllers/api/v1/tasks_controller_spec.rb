@@ -56,4 +56,38 @@ describe Api::V1::TasksController do
     end
   end
 
+  describe '#update' do
+    it 'updates the task' do
+      user = create :user
+      task = create :task, user: user
+      authorize_with user.auth_token
+
+      patch :update,
+        { id: task.id,
+          task: {
+            description: 'Updated task description',
+            date: '11/11/2014',
+            hour: 8
+          },
+          format: :json }
+
+      expect(response.status).to eq 200
+      expect(response.body).to eq(
+        { notice: Api::V1::TasksController::MSG[:update] }.to_json)
+    end
+  end
+
+  describe '#destroy' do
+    it 'destroys the task' do
+      user = create :user
+      task = create :task, user: user
+      authorize_with user.auth_token
+
+      delete :destroy, { id: task.id, format: :json }
+
+      expect(response.status).to eq 200
+      expect(response.body).to eq(
+        { notice: Api::V1::TasksController::MSG[:destroy] }.to_json)
+    end
+  end
 end
